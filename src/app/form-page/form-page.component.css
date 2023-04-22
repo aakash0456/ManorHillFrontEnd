@@ -1,0 +1,13 @@
+.padding_class {
+  padding: 20px;
+}
+
+.margin_class {
+  margin-top: 20px;
+}
+
+
+.card{
+  min-height: 300px;
+  max-height: 300px;
+}

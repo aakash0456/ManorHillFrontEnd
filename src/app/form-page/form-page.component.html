@@ -1,0 +1,53 @@
+<mat-toolbar>
+    <span style="text-align: center; width: 100%;">Manor Hill Advisors Demo</span>
+</mat-toolbar>
+<div class="container">
+    <div class="row padding_class">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Form</div>
+                <form class="padding_class" [formGroup]="reactiveForm" #form="ngForm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Enter Time Zone</label>
+                        <input type="text" class="form-control" formControlName="time"
+                            [class.is-invalid]="time.invalid && (time.dirty || time.touched)" />
+                        <div *ngIf="time.invalid && (time.dirty || time.touched)" class="invalid-feedback">
+                            <div *ngIf="time.errors?.['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="margin_class">
+                        <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="result">
+            <div class="card">
+                <div class="card-header">Results</div>
+                <div class="padding_class">
+                    <div class="p-3 mb-2 bg-success text-white">{{result.datetime}}</div>
+                    <div class="p-3 mb-2 bg-info text-white">{{result.timezone}}</div>
+                    <div class="p-3 mb-2 bg-light text-dark">{{result.abbreviation}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Sr.</th>
+                    <th scope="col">Valid Timezones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let res of timezones; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{res}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
