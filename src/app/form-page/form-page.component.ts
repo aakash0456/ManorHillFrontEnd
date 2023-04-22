@@ -11,10 +11,12 @@ import { AlertBoxComponent } from '../alert-box/alert-box.component';
 })
 export class FormPageComponent {
   reactiveForm: FormGroup<{ time: FormControl<null> }>;
-  timezones = ["America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles", "America/Adak" , "America/Anchorage", "Pacific/Honolulu",
-  "Pacific/Samoa", "Pacific/Guam", "America/Puerto_Rico", "America/Virgin"]
+  timezones = ["America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles", "America/Adak", "America/Anchorage", "Pacific/Honolulu",
+    "Pacific/Samoa", "Pacific/Guam", "America/Puerto_Rico", "America/Virgin"]
 
   result: result | null = null;
+  loading = false;
+
   constructor(private httpService: HttpService, public dialog: MatDialog) {
     this.reactiveForm = new FormGroup({
       time: new FormControl(null, [
@@ -32,10 +34,13 @@ export class FormPageComponent {
   submit() {
     this.result = null;
     if (this.reactiveForm?.invalid) return;
-    const data = this.reactiveForm?.get('time')?.value || ''
+    const data = this.reactiveForm?.get('time')?.value || '';
+    this.loading = true;
     this.httpService.get(data).subscribe((res: any) => {
       this.result = res;
+      this.loading = false;
     }, err => {
+      this.loading = false;
       this.dialog.open(AlertBoxComponent, {
         data: {
           message: 'Please Input Valid Data',

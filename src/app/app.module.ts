@@ -10,10 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from './http.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
-import { AppLoaderComponent } from './app-loader/app-loader.component';
+import { NgxLoadingModule } from "ngx-loading";
 
 @NgModule({
-  declarations: [AppComponent, FormPageComponent, AlertBoxComponent, AppLoaderComponent],
+  declarations: [AppComponent, FormPageComponent, AlertBoxComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,8 +23,10 @@ import { AppLoaderComponent } from './app-loader/app-loader.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxLoadingModule.forRoot({}),
+
   ],
   providers: [HttpService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
